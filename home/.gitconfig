@@ -1,0 +1,5 @@
+[user]
+	name = Judd Maltin
+	email = judd@newgoliath.com
+[credential]
+	helper = cache
