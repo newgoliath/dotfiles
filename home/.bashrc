@@ -10,13 +10,16 @@ fi
 
 # User specific aliases and functions
 
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-if  uname -a | grep -q Darwin ; then
-  . /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-else
-  . /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+# Powerline?
+if command -v powerline -h >/dev/null 2>&1; then
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	if  uname -a | grep -q Darwin ; then
+	  . /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+	else
+	  . /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+	fi
 fi
 
 
@@ -29,3 +32,5 @@ source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 homeshick --quiet refresh
 
 export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
+
+set -o vi
