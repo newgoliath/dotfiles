@@ -20,4 +20,7 @@ POWERLINE_BASH_SELECT=1
 
 
 
+#  git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
+#  printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashrc
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
