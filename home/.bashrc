@@ -13,7 +13,11 @@ fi
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+if  uname -a | grep -q Darwin ; then
+  . /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+else
+  . /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
 
 
 
