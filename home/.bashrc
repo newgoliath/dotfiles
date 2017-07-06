@@ -34,3 +34,8 @@ homeshick --quiet refresh
 export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
 
 set -o vi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+if [ -e $HOME/.rvm/bin ]; then
+	export PATH="$PATH:$HOME/.rvm/bin"
+fi
