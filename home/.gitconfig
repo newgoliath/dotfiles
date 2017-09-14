@@ -3,3 +3,8 @@
 	email = judd@newgoliath.com
 [credential]
 	helper = cache
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.gmail.com
+	smtpUser = judd@newgoliath.com
+	smtpServerPort = 587

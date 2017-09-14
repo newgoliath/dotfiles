@@ -1,5 +1,6 @@
 # .bashrc
 
+#set +x
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -36,6 +37,9 @@ export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
 set -o vi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-if [ -e $HOME/.rvm/bin ]; then
-	export PATH="$PATH:$HOME/.rvm/bin"
-fi
+#if [ -e $HOME/.rvm/bin ]; then
+#	export PATH="$PATH:$HOME/.rvm/bin"
+#fi
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+#set -x
