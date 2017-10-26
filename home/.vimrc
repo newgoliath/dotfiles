@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-Plugin 'matcatc/vim-asciidoc-folding'
+"Plugin 'matcatc/vim-asciidoc-folding'
 Plugin 'scrooloose/syntastic'
 
 
