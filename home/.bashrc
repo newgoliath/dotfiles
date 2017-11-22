@@ -41,6 +41,7 @@ set -o vi
 #	export PATH="$PATH:$HOME/.rvm/bin"
 #fi
 
+# mac brew based bash_completions
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 #set -x
 
