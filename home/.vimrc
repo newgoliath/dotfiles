@@ -53,19 +53,23 @@ set relativenumber
 
 " Open file in Chrome
 :map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" file:///%:p<CR>
-:map <F6> vat<Esc>`<df>`>F<df>
+:map <silent> <F6> vat<Esc>`<df>`>F<df>
 
 " Start NERDTree on startup
 autocmd vimenter * NERDTree
+" Jump to the main window.
+autocmd VimEnter * wincmd p
 " For mouse click in NERDTree
 :set mouse=a
 let g:NERDTreeMouseMode=3
 
+" plugin nerdtree-git
 let g:NERDTreeShowGitStatus = 1
 
-" don't fold when opening files - fold them with zc
+" don't fold when opening files - fold them with zc, unfold with zr
 set nofoldenable
 
+""""""""""""""""""""""""""""""""""
 "tbone.vim
 "Basic tmux support for Vim.
 ":Tmux lets you call any old tmux command (with really good tab complete).
@@ -73,4 +77,18 @@ set nofoldenable
 ":Twrite sends a chunk of text to another pane. Give an argument like windowtitle.2, top-right, or last, or let it default to the previously given argument.
 ":Tattach lets you use a specific tmux session from outside of it.
 
-iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
+""""""""""""""""""""""""""""""""""
+" mappings for asciidoc text mgmnt
+
+"iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
+
+" Wrap vselect with [source,bash]
+:vmap sb "zdI[source,bash]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
+" Wrap vselect with text and [source,text]
+:vmap sc "zdI+<CR>Expect the output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
+" Wrap vselect with [source,ini]
+:vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
+
+:map nsl i<CR>== Slide Title<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR>
+
+
