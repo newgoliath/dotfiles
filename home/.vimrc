@@ -13,13 +13,15 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+"Plugin 'severin-lemaignan/vim-minimap'  "a sublime text minimap - useless
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-tbone'
-Plugin 'asciidoc/asciidoc'
+"Plugin 'asciidoc/asciidoc'
+Plugin 'dagwieers/asciidoc-vim'
 Plugin 'matcatc/vim-asciidoc-folding'
 "Plugin 'scrooloose/syntastic'
 Plugin 'w0rp/ale' " async linter
-Plugin '907th/vim-auto-save' " 
+Plugin '907th/vim-auto-save'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'fholgado/minibufexpl.vim'
@@ -55,6 +57,7 @@ set relativenumber
 :map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" file:///%:p<CR>
 :map <silent> <F6> vat<Esc>`<df>`>F<df>
 
+
 " Start NERDTree on startup
 autocmd vimenter * NERDTree
 " Jump to the main window.
@@ -83,12 +86,32 @@ set nofoldenable
 "iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
 
 " Wrap vselect with [source,bash]
-:vmap sb "zdI[source,bash]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
+:vmap sb "zdI[source,bash]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with text and [source,text]
-:vmap sc "zdI+<CR>Expect the output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
+:vmap st "zdI<CR>+<CR>Expect the output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with [source,ini]
 :vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
 
-:map nsl i<CR>== Slide Title<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR>
+:map nsl i<CR>== SlideTitle<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR>
+:map nsp ^"zd$i<CR>== <Esc>"zpa<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR><CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR><Esc>
 
+" find next ==
+:map <silent> <F1> <Esc>/^==\s<CR>z.
 
+" delete text before [ ] and preservetext in [ ]
+:map spp <Esc>d\[di[va[p " remove everything up to [ ] and preserve insides
+:map sap d/[<CR>di[va[p
+
+" wrap text in transcript
+:vmap trans "zdI<CR>ifdef::showscript[]<CR><CR>=== Transcript<CR><CR><C-R>z<CR><CR>endif::showscript[]<CR><CR><Esc>
+
+" asciidoc-folding
+let g:asciidoc_fold_style = 'nested'
+
+" nerdtree ignore - everything but _Lab_
+"let NERDTreeIgnore=['
+"
+" Fix some mouse reporting for big terminals
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
