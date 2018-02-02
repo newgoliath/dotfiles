@@ -53,6 +53,7 @@ export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
 export PATH=$PATH:/Users/jmaltin/.local/lib/aws/bin/
 
 set -o vi
+alias ll='ls -l'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #if [ -e $HOME/.rvm/bin ]; then
