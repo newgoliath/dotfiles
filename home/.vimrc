@@ -29,7 +29,7 @@ Plugin 'w0rp/ale' " async linter
 Plugin '907th/vim-auto-save'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'fholgado/minibufexpl.vim'
+"Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'sjl/vitality.vim'
 "Plugin 'benmills/vimux'
 
@@ -62,6 +62,8 @@ set relativenumber
 :map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" file:///%:p<CR>
 :map <silent> <F6> vat<Esc>`<df>`>F<df>
 
+" mac clipboard
+set clipboard=unnamed
 
 " Start NERDTree on startup
 autocmd vimenter * NERDTree
@@ -69,7 +71,7 @@ autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
 " For mouse click in NERDTree
 :set mouse=a
-let g:NERDTreeMouseMode=3
+"let g:NERDTreeMouseMode=3
 
 " plugin nerdtree-git
 let g:NERDTreeShowGitStatus = 1
@@ -97,18 +99,27 @@ set nofoldenable
 " Wrap vselect with [source,ini]
 :vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
 
-:map nsl i<CR>== SlideTitle<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR>
-:map nsp ^"zd$i<CR>== <Esc>"zpa<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR><CR><CR>ifdef::showscript[]<CR><CR>=== Transcript<CR><CR>endif::showscript[]<CR><CR><Esc>
+" New Slide maps
+:map nsl i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR>endif::showscript[]<CR><CR>
+" New Slide by name
+:map nsn ^"zd$i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== <Esc>"zpa<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR><CR>endif::showscript[]<CR><CR> 
+" New Slide: visual in transcript
+:vmap nst "zdI<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR><C-R>z<CR>endif::showscript[]<CR><CR> 
+" wrap text in transcript
+:vmap trans "zdI<CR>ifdef::showscript[]<CR><CR>Transcript:<CR><CR><C-R>z<CR><CR>endif::showscript[]<CR><CR><Esc> 
 
-" find next ==
-:map <silent> <F1> <Esc>/^==\s<CR>z.
+" moving between slides - move up/down and put title at home
+:map <C-j> zjztzo
+:map <C-k> kzkjztzo
 
 " delete text before [ ] and preservetext in [ ]
 :map spp <Esc>d\[di[va[p " remove everything up to [ ] and preserve insides
 :map sap d/[<CR>di[va[p
 
-" wrap text in transcript
-:vmap trans "zdI<CR>ifdef::showscript[]<CR><CR>=== Transcript<CR><CR><C-R>z<CR><CR>endif::showscript[]<CR><CR><Esc>
+" find next ==
+:map <silent> <F1> <Esc>/^==\s<CR>z.
+
+
 
 " asciidoc-folding
 let g:asciidoc_fold_style = 'nested'
@@ -117,6 +128,6 @@ let g:asciidoc_fold_style = 'nested'
 "let NERDTreeIgnore=['
 "
 " Fix some mouse reporting for big terminals
-if has('mouse_sgr')
-  set ttymouse=sgr
-endif
+"if has('mouse_sgr')
+" set ttymouse=sgr
+"ndif
