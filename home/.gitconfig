@@ -8,3 +8,17 @@
 	smtpServer = smtp.gmail.com
 	smtpUser = judd@newgoliath.com
 	smtpServerPort = 587
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+[merge]
+  summary=true

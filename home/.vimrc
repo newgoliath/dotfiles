@@ -1,10 +1,11 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
 "Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+"nmap <M-j> mz:m+<cr>`z
+"nmap <M-k> mz:m-2<cr>`z
+"vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+"vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -76,6 +77,8 @@ autocmd VimEnter * wincmd p
 " plugin nerdtree-git
 let g:NERDTreeShowGitStatus = 1
 
+" asciidoc-folding
+let g:asciidoc_fold_style = 'nested'
 " don't fold when opening files - fold them with zc, unfold with zr
 set nofoldenable
 
@@ -95,7 +98,7 @@ set nofoldenable
 " Wrap vselect with [source,bash]
 :vmap sb "zdI[source,bash]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with text and [source,text]
-:vmap st "zdI<CR>+<CR>Expect the output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
+:vmap st "zdI<CR>+<CR>Expected Output:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with [source,ini]
 :vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
 
@@ -117,12 +120,19 @@ set nofoldenable
 :map sap d/[<CR>di[va[p
 
 " find next ==
-:map <silent> <F1> <Esc>/^==\s<CR>z.
+":map <silent> <F1> <Esc>/^==\s<CR>z.
 
-
-
-" asciidoc-folding
-let g:asciidoc_fold_style = 'nested'
+" vimdiff ignore whitespace
+"set diffopt+=iwhite
+" rebind some keys in vimdiff
+"if &diff
+    "set cursorline
+    "map ] ]c
+    "map [ [c
+    "hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
+    "hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
+    "hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
+"endif
 
 " nerdtree ignore - everything but _Lab_
 "let NERDTreeIgnore=['
@@ -131,3 +141,24 @@ let g:asciidoc_fold_style = 'nested'
 "if has('mouse_sgr')
 " set ttymouse=sgr
 "ndif
+"
+"FROM ASCIIDOC PAGE
+"" Use bold bright fonts.
+"set background=dark
+
+" Show tabs and trailing characters.
+"set listchars=tab:»·,trail:·,eol:¬
+"set listchars=tab:»·,trail:·
+"set list
+
+" Reformat paragraphs and list.
+"nnoremap <Leader>r gq}
+
+" Delete trailing white space and Dos-returns and to expand tabs to spaces.
+"nnoremap <Leader>t :set et<CR>:retab!<CR>:%s/[\r \t]\+$//<CR>
+
+"autocmd BufRead,BufNewFile *.txt,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
+        "\ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
+        "\ textwidth=70 wrap formatoptions=tcqn
+        "\ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
+        "\ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>

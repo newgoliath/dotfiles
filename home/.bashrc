@@ -31,6 +31,7 @@ fi
 #	fi
 #fi
 
+
 if command -v /usr/local/bin/powerline-go -h >/dev/null 2>&1; then
   function _update_ps1() {
       PS1="$(/usr/local/bin/powerline-go -error $? -modules 'time,host,cwd,git,exit,root' -shell 'bash' -priority 'root,cwd,user,host,time,git-branch,git-status'  )"
@@ -68,7 +69,9 @@ echo bash completion
 alias ll='ls -la'
 alias lh='ls -lah'
 alias lz='ls -luthra'
+alias dpl='cd ~/newgoliath/ocp_advanced_deployment/'
 
 #set +x
 #exec 2>&3 3>&-
+
 
