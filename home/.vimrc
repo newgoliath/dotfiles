@@ -67,7 +67,7 @@ set relativenumber
 set clipboard=unnamed
 
 " Start NERDTree on startup
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 " Jump to the main window.
 autocmd VimEnter * wincmd p
 " For mouse click in NERDTree
@@ -123,7 +123,7 @@ set nofoldenable
 ":map <silent> <F1> <Esc>/^==\s<CR>z.
 
 " vimdiff ignore whitespace
-"set diffopt+=iwhite
+set diffopt+=iwhite
 " rebind some keys in vimdiff
 "if &diff
     "set cursorline
@@ -133,6 +133,10 @@ set nofoldenable
     "hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
     "hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
 "endif
+" vimdiff - no syntax highlitghting
+if &diff
+    syntax off
+endif
 
 " nerdtree ignore - everything but _Lab_
 "let NERDTreeIgnore=['
