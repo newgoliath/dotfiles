@@ -60,7 +60,7 @@ set number
 set relativenumber
 
 " Open file in Chrome
-:map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" file:///%:p<CR>
+:map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" webapi#http#escape(file:///%:p<CR>)
 :map <silent> <F6> vat<Esc>`<df>`>F<df>
 
 " mac clipboard
@@ -96,9 +96,11 @@ set nofoldenable
 "iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
 
 " Wrap vselect with [source,bash]
-:vmap sb "zdI[source,bash]<CR>----<CR><C-R>z----<CR><Esc>
+:vmap sb "zdI+<CR>[source,bash]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with text and [source,text]
-:vmap st "zdI<CR>+<CR>Expected Output:<CR>+<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
+:vmap st "zdI+<CR>.Example Output:<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
+" Wrap vselect with [source,yaml]
+:vmap sy "zdI+<CR>[source,yaml]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with [source,ini]
 :vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
 

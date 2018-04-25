@@ -42,7 +42,7 @@ if command -v /usr/local/bin/powerline-go -h >/dev/null 2>&1; then
   fi
 fi
 
-echo homeshick
+#echo homeshick
 # HOMESHICK
 #  git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 #  printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashrc
@@ -61,7 +61,7 @@ alias ll='ls -l'
 #	export PATH="$PATH:$HOME/.rvm/bin"
 #fi
 
-echo bash completion
+#echo bash completion
 # mac brew based bash_completions
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 #set -x
