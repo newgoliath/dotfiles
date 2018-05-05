@@ -95,10 +95,12 @@ set nofoldenable
 
 "iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
 
+" Wrap vselect with show_solution=true
+:vmap ss "zdIifeval::[{show_solution} == true]<CR><C-R>zendif::[]<CR><Esc>
 " Wrap vselect with [source,bash]
 :vmap sb "zdI+<CR>[source,bash]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with text and [source,text]
-:vmap st "zdI+<CR>.Example Output:<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
+:vmap st "zdI+<CR>.Sample Output:<CR>[source,text]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with [source,yaml]
 :vmap sy "zdI+<CR>[source,yaml]<CR>----<CR><C-R>z----<CR><Esc>
 " Wrap vselect with [source,ini]
