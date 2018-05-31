@@ -20,6 +20,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 "Plugin 'severin-lemaignan/vim-minimap'  "a sublime text minimap - useless
+Plugin 'vim-airline/vim-airline'
+"Plugin 'chase/vim-ansible-yaml'
+Plugin 'pearofducks/ansible-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-tbone'
 "Plugin 'asciidoc/asciidoc'
@@ -30,6 +33,7 @@ Plugin 'w0rp/ale' " async linter
 Plugin '907th/vim-auto-save'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'vim-voom/VOoM'
 "Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'sjl/vitality.vim'
 "Plugin 'benmills/vimux'
@@ -38,8 +42,11 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+" POWERLINE
+"set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+"set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+let g:airline_powerline_fonts = 1
+
 set laststatus=2
 set t_Co=256
 syntax enable
@@ -60,7 +67,8 @@ set number
 set relativenumber
 
 " Open file in Chrome
-:map <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" webapi#http#escape(file:///%:p<CR>)
+:noremap <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default" file:///%:p<CR>
+":noremap <silent> <F5> :! open -n -a "Google Chrome" --args --profile-directory="Default"; webapi#http#escape(file:///%:p<CR>)
 :map <silent> <F6> vat<Esc>`<df>`>F<df>
 
 " mac clipboard
@@ -107,17 +115,21 @@ set nofoldenable
 :vmap si "zdI+<CR>[source,ini]<CR>----<CR><C-R>z----<CR>+<CR><Esc>
 
 " New Slide maps
-:map nsl i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR>endif::showscript[]<CR><CR>
+:map nsl i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR>endif::showscript[]<CR><CR><Esc>
 " New Slide by name
-:map nsn ^"zd$i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== <Esc>"zpa<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR><CR>endif::showscript[]<CR><CR> 
+:map nsn ^"zd$i<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== <Esc>"zpa<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR>endif::showscript[]<CR><Esc>?==<CR><Esc>
 " New Slide: visual in transcript
-:vmap nst "zdI<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR><C-R>z<CR>endif::showscript[]<CR><CR> 
+:vmap nst "zdI<CR>:scrollbar:<CR>:data-uri:<CR>:noaudio:<CR>== SLIDE TITLE<CR><CR><CR>ifdef::showscript[]<CR>Transcript:<CR><CR><C-R>z<CR>endif::showscript[]<CR><CR><Esc>
 " wrap text in transcript
 :vmap trans "zdI<CR>ifdef::showscript[]<CR><CR>Transcript:<CR><CR><C-R>z<CR><CR>endif::showscript[]<CR><CR><Esc> 
 
 " moving between slides - move up/down and put title at home
 :map <C-j> zjztzo
 :map <C-k> kzkjztzo
+
+" delete trailing whitespace and replace three or more consecutive line
+" endings with two line endings
+:map cleanup <Esc>:%s/\s\+$//e<CR>:%s/\n\{3,}/\r\r/e<CR>
 
 " delete text before [ ] and preservetext in [ ]
 :map spp <Esc>d\[di[va[p " remove everything up to [ ] and preserve insides
@@ -170,3 +182,7 @@ endif
         "\ textwidth=70 wrap formatoptions=tcqn
         "\ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
         "\ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
+        "
+
+" Plug-in vim-ansible-yaml brings up the module documentation if your cursor is in the module name
+let g:ansible_options = {'documentation_mapping': '<C-K>'}

@@ -75,3 +75,4 @@ alias dpl='cd ~/newgoliath/ocp_advanced_deployment/'
 #exec 2>&3 3>&-
 
 
+export GUID=
