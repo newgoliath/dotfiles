@@ -21,17 +21,19 @@ Plugin 'VundleVim/Vundle.vim'
 """""
 " Esthetics and Syntax and Workflow
 Plugin 'vim-airline/vim-airline'
-Plugin 'w0rp/ale' " amazing async linter
+" amazing async linter
+Plugin 'w0rp/ale' 
 Plugin '907th/vim-auto-save'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-voom/VOoM'
 "Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'severin-lemaignan/vim-minimap'  "a sublime text minimap - useless
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 """""
 " Git
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 """""
 " Asciidoc
 Plugin 'dagwieers/asciidoc-vim'
@@ -40,10 +42,10 @@ Plugin 'matcatc/vim-asciidoc-folding'
 """""
 " Ansible
 Plugin 'pearofducks/ansible-vim'
-"Plugin 'chase/vim-ansible-yaml'
+Plugin 'chase/vim-ansible-yaml'
 """""
 " Tmux and Terminals
-Plugin 'tpope/vim-tbone'
+"Plugin 'tpope/vim-tbone'
 "Plugin 'sjl/vitality.vim'
 "Plugin 'benmills/vimux'
 
@@ -52,6 +54,14 @@ filetype plugin indent on    " required
 """"""""""""""""""""
 " Plugins - Vundle - END
 """"""""""""""""""""
+" ale settings - linter
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 1
+let g:ale_list_window_size = 5
+ 
+
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
 
 
 """"""""""""""""""""
@@ -64,8 +74,8 @@ syntax enable
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set number
-set relativenumber
+"set number
+"set relativenumber
 
 " Vim8 only:
 " Plugins need to be added to runtimepath before helptags can be generated.
@@ -88,7 +98,7 @@ silent! helptags ALL
 :map <silent> <F6> vat<Esc>`<df>`>F<df>
 
 " mac clipboard
-set clipboard=unnamed
+set clipboard+=unnamed
 
 """""
 " Vimdiff
@@ -136,6 +146,7 @@ set nofoldenable
 """"""""""""""""""""
 " mappings for asciidoc text mgmnt
 
+
 "iab _source [source,bash]<CR>----<CR><CR>----<CR>+<CR>Expect output to look similar to this:<CR>+<CR>[source,text]<CR>----<CR><CR>----<CR>
 
 " Wrap vselect with show_solution=true
@@ -161,6 +172,12 @@ set nofoldenable
 " moving between slides - move up/down and put title at home
 :map <C-j> zjztzo
 :map <C-k> kzkjztzo
+
+
+" change '.headings' to '=== headings'
+:cmap hf :%s/^\.\(\w\+.*\)$/=== \1/
+:cmap nhf :%s/^=== \(\w\+.*\)$/.\1/
+
 
 " delete trailing whitespace and replace three or more consecutive line
 " endings with two line endings

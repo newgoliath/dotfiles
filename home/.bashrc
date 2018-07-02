@@ -74,5 +74,4 @@ alias dpl='cd ~/newgoliath/ocp_advanced_deployment/'
 #set +x
 #exec 2>&3 3>&-
 
-
-export GUID=
+export PATH="/Users/jmaltin/.minishift/cache/oc/v3.9.0/darwin:$PATH" # Run this command to configure your shell: # eval $(minishift oc-env)
