@@ -15,32 +15,14 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# User specific aliases and functions
+function _update_ps1() {
+    PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,vgo,kube)"
+}
 
-# Powerline exists?
-#if command -v powerline -h >/dev/null 2>&1; then
-#  echo start powerline
-#  POWERLINE_BASH_CONTINUATION=1
-#	POWERLINE_BASH_SELECT=1
-#  powerline-daemon -q
-#	if  uname -a | grep -q Darwin ; then
-#    echo darwin powerline
-#	  . /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-#	else
-#	  . /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-#	fi
+#if [ "$TERM" != "linux" ] && [ -f "/usr/local/bin/powerline-go" ]; then
+#    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 #fi
 
-
-if command -v /usr/local/bin/powerline-go -h >/dev/null 2>&1; then
-  function _update_ps1() {
-      PS1="$(/usr/local/bin/powerline-go -error $? -modules 'time,host,cwd,git,exit,root' -shell 'bash' -priority 'root,cwd,user,host,time,git-branch,git-status'  )"
-  }
-
-  if [ "$TERM" != "linux" ]; then
-      PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-  fi
-fi
 
 #echo homeshick
 # HOMESHICK
@@ -74,6 +56,20 @@ alias dpl='cd ~/newgoliath/ocp_advanced_deployment/'
 #set +x
 #exec 2>&3 3>&-
 
-export PATH="/Users/jmaltin/.minishift/cache/oc/v3.9.0/darwin:$PATH" # Run this command to configure your shell: # eval $(minishift oc-env)
 
-export PATH=$PATH:/$HOME/bin
+export PATH=$PATH:/$HOME/bin:/usr/local/opt/python/libexec/bin
+set -o vi
+alias bastion=/Users/jmaltin/newgoliath/OPEN_Admin/tools/mac_cli/bastion
+GITHUB_ACCOUNT=newgoliath
+#eval $(thefuck --alias --enable-experimental-instant-mode)
+eval $(thefuck --alias)
+
+# add pageing to ripgrep
+rg() {
+    if [ -t 1 ]; then
+        command rg -p "$@" | less -RFX
+    else
+        command rg "$@"
+    fi
+}
+
