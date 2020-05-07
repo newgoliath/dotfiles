@@ -30,18 +30,12 @@ function _update_ps1() {
 #  printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashrc
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-homeshick --quiet refresh
 
 export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
 export PATH=$PATH:/Users/jmaltin/.local/lib/aws/bin/
 
 set -o vi
 alias ll='ls -l'
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-#if [ -e $HOME/.rvm/bin ]; then
-#	export PATH="$PATH:$HOME/.rvm/bin"
-#fi
 
 #echo bash completion
 # mac brew based bash_completions
@@ -53,16 +47,11 @@ alias lh='ls -lah'
 alias lz='ls -luthra'
 alias dpl='cd ~/newgoliath/ocp_advanced_deployment/'
 
-#set +x
 #exec 2>&3 3>&-
 
+[ -d /usr/local/opt/python/libexec/bin ] && export PATH=$PATH:/$HOME/bin:/usr/local/opt/python/libexec/bin
 
-export PATH=$PATH:/$HOME/bin:/usr/local/opt/python/libexec/bin
-set -o vi
-alias bastion=/Users/jmaltin/newgoliath/OPEN_Admin/tools/mac_cli/bastion
-GITHUB_ACCOUNT=newgoliath
-#eval $(thefuck --alias --enable-experimental-instant-mode)
-eval $(thefuck --alias)
+[ -x /usr/local/bin/fuck ] && eval $(thefuck --alias)
 
 # add pageing to ripgrep
 rg() {
@@ -73,3 +62,12 @@ rg() {
     fi
 }
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/home/jmaltin-redhat.com/perl5";
+export PERL_MB_OPT="--install_base /home/jmaltin-redhat.com/perl5";
+export PERL_MM_OPT="INSTALL_BASE=/home/jmaltin-redhat.com/perl5";
+export PERL5LIB="/home/jmaltin-redhat.com/perl5/lib/perl5:$PERL5LIB";
+export PATH="/home/jmaltin-redhat.com/perl5/bin:$PATH";
+
+source scl_source enable rh-python36
