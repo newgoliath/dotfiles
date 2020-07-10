@@ -9,3 +9,6 @@ export GOPATH="/Users/jmaltin/go"
 #eval "$(rbenv init -)"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# opam configuration
+test -r /Users/jmaltin/.opam/opam-init/init.sh && . /Users/jmaltin/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
