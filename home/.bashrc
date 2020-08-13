@@ -47,6 +47,7 @@ alias ll='ls -la'
 alias lh='ls -lah'
 alias lz='ls -luthra'
 alias dpl='cd ~/newgoliath/ocp4_advanced_deployment/'
+alias app='cd ~/newgoliath/ocp_advanced_development/'
 
 # global redirection
 #exec 2>&3 3>&-
@@ -72,11 +73,11 @@ rg() {
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Perl
-export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/home/jmaltin-redhat.com/perl5";
-export PERL_MB_OPT="--install_base /home/jmaltin-redhat.com/perl5";
-export PERL_MM_OPT="INSTALL_BASE=/home/jmaltin-redhat.com/perl5";
-export PERL5LIB="/home/jmaltin-redhat.com/perl5/lib/perl5:$PERL5LIB";
-export PATH="/home/jmaltin-redhat.com/perl5/bin:$PATH";
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:$HOME/perl5";
+export PERL_MB_OPT="--install_base $HOME/perl5";
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5";
+export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB";
+export PATH="$HOME/perl5/bin:$PATH";
 
 # Raku
 export PATH=$PATH:/Applications/Rakudo/bin:/Applications/Rakudo/share/perl6/site/bin
