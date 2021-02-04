@@ -2,7 +2,7 @@
 
 #export PS1='\T [\u@\h \W]\#' <- bash prompt with timestamp
 
-#set +x
+#set -x
 #PS4='+ $(date "+%s.%N")\011 '
 #exec 3>&2 2>/tmp/bashstart.$$.log
 #set -x
@@ -16,33 +16,37 @@ fi
 # export SYSTEMD_PAGER=
 
 # powerline
-if [ "$TERM" != "linux" ] && [ -f "/usr/local/bin/powerline-go" ]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-  function _update_ps1() {
-      PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,vgo,kube)"
-  }
+ENABLE_POWERLINE="True"
+if [ -n "$ENABLE_POWERLINE" ]; then
+  if [ "$TERM" != "linux" ] && [ -f "/usr/local/bin/powerline-go" ]; then
+      PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+    function _update_ps1() {
+        PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,vgo,kube)"
+    }
+  fi
 fi
 
-
-#echo homeshick
 # HOMESHICK
 #  git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 #  printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashrc
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+ENABLE_HOMESHICK="True"
+if [ -n "$ENABLE_HOMESHICK" ]; then
+  source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+  source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+fi
 
 [ -f /usr/java/jre1.8.0_131/bin/ ] && export PATH=$PATH:/usr/java/jre1.8.0_131/bin/
 
 [ -f $HOME/.local/lib/aws/bin/ ] && export PATH=$PATH:$HOME/.local/lib/aws/bin/
 
-set -o vi
-alias ll='ls -l'
 
 #echo bash completion
 # mac brew based bash_completions
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 #set -x
 
+# Judd's favorite aliases
+set -o vi
 alias ll='ls -la'
 alias lh='ls -lah'
 alias lz='ls -luthra'
@@ -79,10 +83,10 @@ export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5";
 export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB";
 export PATH="$HOME/perl5/bin:$PATH";
 
-# Raku
-export PATH=$PATH:/Applications/Rakudo/bin:/Applications/Rakudo/share/perl6/site/bin
-
+# Mac Raku
+[ -f /Applications/Rakudo ] && export PATH=$PATH:/Applications/Rakudo/bin:/Applications/Rakudo/share/perl6/site/bin
 
 # Ansible
 export ANSIBLE_NOCOWS=1
 
+#set +x
