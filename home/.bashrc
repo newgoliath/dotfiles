@@ -18,10 +18,12 @@ fi
 # powerline
 ENABLE_POWERLINE="True"
 if [ -n "$ENABLE_POWERLINE" ]; then
-  if [ "$TERM" != "linux" ] && [ -f "/usr/local/bin/powerline-go" ]; then
-      PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+  #if [ "$TERM" != "linux" ] && [ -f "/usr/local/bin/powerline-go" ]; then
+  if [ -f "/usr/local/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
     function _update_ps1() {
-        PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,vgo,kube)"
+        PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,jobs,exit,root,vgo,kube -truncate-segment-width 5 )"
+        #PS1="$(/usr/local/bin/powerline-go -error $? -newline -modules nix-shell,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,vgo)"
     }
   fi
 fi
@@ -57,9 +59,13 @@ alias app='cd ~/newgoliath/ocp_advanced_development/'
 #exec 2>&3 3>&-
 
 # python
-[ -d /usr/local/opt/python/libexec/bin ] && export PATH=$PATH:/$HOME/bin:/usr/local/opt/python/libexec/bin
+#[ -d /usr/local/opt/python/libexec/bin ] && export PATH=$PATH:/$HOME/bin:/usr/local/opt/python/libexec/bin
 ## rhel python
-[ -x scl_source ] && source scl_source enable rh-python36
+#[ -x scl_source ] && source scl_source enable rh-python36
+
+export WORKON_HOME=~/.virtualenvs
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 
 # thefuck
 [ -x /usr/local/bin/fuck ] && eval $(thefuck --alias)
@@ -89,4 +95,7 @@ export PATH="$HOME/perl5/bin:$PATH";
 # Ansible
 export ANSIBLE_NOCOWS=1
 
+export PATH=$HOME/bin:$PATH
+[ -x /usr/loca/bin/nvim ] && export EDITOR=/usr/local/bin/nvim
 #set +x
+
