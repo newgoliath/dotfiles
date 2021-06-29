@@ -1,4 +1,4 @@
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi 
+if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
 alias ll='ls -la'
 alias lh='ls -lah'
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -12,3 +12,6 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 # opam configuration
 test -r /Users/jmaltin/.opam/opam-init/init.sh && . /Users/jmaltin/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+# .bash_profile
+
+# User specific environment and startup programs
