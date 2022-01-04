@@ -15,3 +15,4 @@ test -r /Users/jmaltin/.opam/opam-init/init.sh && . /Users/jmaltin/.opam/opam-in
 # .bash_profile
 
 # User specific environment and startup programs
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"

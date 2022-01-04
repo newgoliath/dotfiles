@@ -66,6 +66,7 @@ alias app='cd ~/newgoliath/ocp_advanced_development/'
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 [ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # thefuck
 [ -x /usr/local/bin/fuck ] && eval $(thefuck --alias)
@@ -97,13 +98,16 @@ export ANSIBLE_NOCOWS=1
 
 export PATH=$HOME/bin:$PATH
 
-if [ -x /usr/loca/bin/nvim ]
+if [ -x /usr/local/bin/nvim ]
 then
   export EDITOR=/usr/local/bin/nvim
-  alias 'vim=nvim'
+  alias 'vim=/usr/local/bin/nvim'
+  alias 'vimdiff=/usr/local/bin/nvim -d'
 fi
 
 #set +x
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+export OCP_USER=judd
+export PATH="${PATH}:${HOME}/.krew/bin"
